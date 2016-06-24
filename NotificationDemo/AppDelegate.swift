@@ -19,8 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         //  认证通知
-        center.requestAuthorization([.alert, .sound, .badge]) { (granted, error) in }
+        center.requestAuthorization([.alert, .sound, .badge]) { (granted, error) in
+            if granted == true {
+                application.registerForRemoteNotifications()
+            }
+        }
         return true
+    }
+}
+
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print(deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: ""))
+    }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
     }
 }
 
@@ -46,7 +62,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             case String.UNNotificationAction.Reject.rawValue:
                 
                 break
-            case String.UNNotificationAction.Ignore.rawValue:
+            case String.UNNotificationAction.Input.rawValue:
                 
                 break
             case UNNotificationDismissActionIdentifier:

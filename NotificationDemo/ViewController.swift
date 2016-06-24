@@ -9,63 +9,72 @@
 import UIKit
 import UserNotifications
 
-extension String {
-    enum UNNotificationAction : String {
-        case Accept
-        case Reject
-        case Ignore
-    }
-    
-    enum UNNotificationCategory : String {
-        case Fuck
-    }
-    
-    enum UNNotificationRequest : String {
-        case Test
-    }
-}
-
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let center = UNUserNotificationCenter.current()
         
         // 创建通知响应事件
-        let accept = UNNotificationAction.init(identifier: String.UNNotificationAction.Accept.rawValue,
-                                               title: "接受",
-                                               options: UNNotificationActionOptions.foreground)
-        let decline = UNNotificationAction.init(identifier: String.UNNotificationAction.Reject.rawValue,
-                                                title: "拒绝",
-                                                options: UNNotificationActionOptions.destructive)
-        let snooze = UNNotificationAction.init(identifier: String.UNNotificationAction.Ignore.rawValue,
-                                               title: "无视",
-                                               options: [])
-        let actions = [ accept, decline, snooze ]
+        let accept = UNNotificationAction(identifier: String.UNNotificationAction.Accept.rawValue,
+                                          title: "同意",
+                                          options: UNNotificationActionOptions.foreground)
+        let reject = UNNotificationAction(identifier: String.UNNotificationAction.Reject.rawValue,
+                                           title: "不同意",
+                                           options: UNNotificationActionOptions.destructive)
+        
+        let comment = UNTextInputNotificationAction(identifier: String.UNNotificationCategory.CheerText.rawValue, title: "说点什么", options: [])
         
         //  创建一个新的通知类型
-        let inviteCategory = UNNotificationCategory(identifier: String.UNNotificationCategory.Fuck.rawValue,
-                                                    actions: actions,
-                                                    minimalActions: actions,
-                                                    intentIdentifiers: [],
-                                                    options: [])
+        let normal = UNNotificationCategory(identifier: String.UNNotificationCategory.Normal.rawValue,
+                                            actions: [ accept, reject ],
+                                            minimalActions: [ accept, reject ],
+                                            intentIdentifiers: [],
+                                            options: [])
         
+        //  创建新的通知类型， 并且加入 notification content plist
+        let cheer = UNNotificationCategory(identifier: String.UNNotificationCategory.Cheer.rawValue,
+                                           actions: [ accept, reject ],
+                                           minimalActions: [ accept, reject ],
+                                           intentIdentifiers: [],
+                                           options: [])
+        
+        //  创建新的通知类型， 并且加入 notification content plist
+        let cheerText = UNNotificationCategory(identifier: String.UNNotificationCategory.CheerText.rawValue,
+                                               actions: [ accept, reject, comment ],
+                                               minimalActions: [ accept, reject, comment ],
+                                               intentIdentifiers: [],
+                                               options: [])
         //  将新的通知类型加入通知中心
-        center.setNotificationCategories([inviteCategory])
+        center.setNotificationCategories([normal, cheer, cheerText])
+        
     }
     
-    @IBAction func scheduleAction(_ sender: AnyObject) {
+    @IBAction func localPush(_ sender: AnyObject) {
+
         //  创建通知内容
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "来自火星：", arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "fuck, fuck, fuck", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
+        content.subtitle = NSDate().description
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
         content.sound = UNNotificationSound.default()
         content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
-        content.categoryIdentifier = String.UNNotificationCategory.Fuck.rawValue    //  设置通知类型
+        content.categoryIdentifier = String.UNNotificationCategory.Normal.rawValue   //  设置通知类型
     
+        //  加入 attachment 附件
+        let path = Bundle.main().pathForResource("cheer", ofType: "png")
+        let url = URL(fileURLWithPath: path!)
+        let options: [NSObject : AnyObject] = [UNNotificationAttachmentOptionsThumbnailHiddenKey : false,
+                                             UNNotificationAttachmentOptionsTypeHintKey : url.path!]
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: options)
+        
+        content.attachments = [attachement!]
+        
         //  通知交付条件设定
         let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 1.0, repeats: true)
+    
+        //  创建通知请求
         let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.Test.rawValue, content: content, trigger: nil)
         
         //  将通知排入计划
@@ -73,9 +82,55 @@ class ViewController: UIViewController {
         center.add(request)
     }
     
-    @IBAction func stopAction(_ sender: AnyObject) {
+    
+    
+    @IBAction func localPushWithCustomUI1(_ sender: AnyObject) {
+
+        //  创建通知内容
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
+        content.subtitle = NSDate().description
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.sound = UNNotificationSound.default()
+        content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
+        content.categoryIdentifier = String.UNNotificationCategory.Cheer.rawValue   //  设置通知类型
+        
+        //  加入 attachment 附件
+        let path = Bundle.main().pathForResource("cheer", ofType: "png")
+        let url = URL(fileURLWithPath: path!)
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
+        content.attachments = [attachement!]
+        
+        //  创建通知请求
+        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.Test.rawValue, content: content, trigger: nil)
+        
+        //  将通知排入计划
         let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [String.UNNotificationRequest.Test.rawValue])
+        center.add(request)
+    }
+    
+    @IBAction func localPushWithCustomUI2(_ sender: AnyObject) {
+        //  创建通知内容
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
+        content.subtitle = NSDate().description
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.sound = UNNotificationSound.default()
+        content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
+        content.categoryIdentifier = String.UNNotificationCategory.CheerText.rawValue   //  设置通知类型
+        
+        //  加入 attachment 附件
+        let path = Bundle.main().pathForResource("cheer", ofType: "png")
+        let url = URL(fileURLWithPath: path!)
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
+        content.attachments = [attachement!]
+        
+        //  创建通知请求
+        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.Test.rawValue, content: content, trigger: nil)
+        
+        //  将通知排入计划
+        let center = UNUserNotificationCenter.current()
+        center.add(request)
     }
 }
 
