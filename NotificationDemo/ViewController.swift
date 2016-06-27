@@ -18,13 +18,17 @@ class ViewController: UIViewController {
         
         // 创建通知响应事件
         let accept = UNNotificationAction(identifier: String.UNNotificationAction.Accept.rawValue,
-                                          title: "同意",
+                                          title: "Agree",
                                           options: UNNotificationActionOptions.foreground)
         let reject = UNNotificationAction(identifier: String.UNNotificationAction.Reject.rawValue,
-                                           title: "不同意",
+                                           title: "DisAgree",
                                            options: UNNotificationActionOptions.destructive)
         
-        let comment = UNTextInputNotificationAction(identifier: String.UNNotificationAction.Input.rawValue, title: "说点什么", options: [], textInputButtonTitle: "评论", textInputPlaceholder: "gangangan")
+        let comment = UNTextInputNotificationAction(identifier: String.UNNotificationAction.Input.rawValue,
+                                                    title: "Input Someting",
+                                                    options: [],
+                                                    textInputButtonTitle: "Comment",
+                                                    textInputPlaceholder: "Input Someting")
         
         //  创建一个新的通知类型
         let normal = UNNotificationCategory(identifier: String.UNNotificationCategory.Normal.rawValue,
@@ -54,24 +58,21 @@ class ViewController: UIViewController {
     @IBAction func localPush(_ sender: AnyObject) {
         //  创建通知内容
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
-        content.subtitle = NSDate().description
-        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:",
+                                                                 arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music,best music.\n下拉或重压显示更多",
+                                                                arguments: nil)
         content.sound = UNNotificationSound.default()
         content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
-        content.categoryIdentifier = String.UNNotificationCategory.Normal.rawValue   //  设置通知类型
+        content.categoryIdentifier = String.UNNotificationCategory.Normal.rawValue   //  设置通知类型标示
     
         //  加入 attachment 附件
-        let path = Bundle.main().pathForResource("cheer", ofType: "png")
-        let url = URL(fileURLWithPath: path!)
-        let options: [NSObject : AnyObject] = [UNNotificationAttachmentOptionsThumbnailHiddenKey : false,
-                                             UNNotificationAttachmentOptionsTypeHintKey : url.path!]
-        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: options)
-        
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: URL.resource(type: .Local1), options: nil)
         content.attachments = [attachement!]
     
         //  创建通知请求
-        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.NormalLocalPush.rawValue, content: content, trigger: nil)
+        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.NormalLocalPush.rawValue,
+                                                 content: content, trigger: nil)
         
         //  将通知排入计划
         let center = UNUserNotificationCenter.current()
@@ -79,22 +80,25 @@ class ViewController: UIViewController {
     }
     
     
-    //  MARK: 带有交付条件的通知推送
+    //  MARK: 带有触发条件的通知推送
     @IBAction func localPushWithTrigger(_ sender: AnyObject) {
         //  创建通知内容
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
-        content.subtitle = NSDate().description
-        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:",
+                                                                 arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music,best music.\n下拉或重压显示更多",
+                                                                arguments: nil)
         content.sound = UNNotificationSound.default()
         content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
-        content.categoryIdentifier = String.UNNotificationCategory.Normal.rawValue   //  设置通知类型
+        content.categoryIdentifier = String.UNNotificationCategory.Normal.rawValue   //  设置通知类型标示
         
-        //  通知交付条件设定为五秒触发一次
-        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 5.0, repeats: true)
+        //  通知触发条件设定为2秒触发一次
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 2, repeats: true)
         
         //  创建通知请求
-        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.LocalPushWithTrigger.rawValue, content: content, trigger: trigger)
+        let request = UNNotificationRequest.init(identifier: String.UNNotificationRequest.LocalPushWithTrigger.rawValue,
+                                                 content: content,
+                                                 trigger: trigger)
         
         //  将通知排入计划
         let center = UNUserNotificationCenter.current()
@@ -106,17 +110,17 @@ class ViewController: UIViewController {
 
         //  创建通知内容
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
-        content.subtitle = NSDate().description
-        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:",
+                                                                 arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music,best music.\n下拉或重压显示更多",
+                                                                arguments: nil)
         content.sound = UNNotificationSound.default()
         content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
-        content.categoryIdentifier = String.UNNotificationCategory.Cheer.rawValue   //  设置通知类型
+        content.categoryIdentifier = String.UNNotificationCategory.Cheer.rawValue   //  设置通知类型标示
+        content.userInfo["imageAbsoluteString"] = URL.resource(type: .Remote).absoluteString
         
         //  加入 attachment 附件
-        let path = Bundle.main().pathForResource("cheer", ofType: "png")
-        let url = URL(fileURLWithPath: path!)
-        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: URL.resource(type: .Local), options: nil)
         content.attachments = [attachement!]
         
         //  创建通知请求
@@ -131,17 +135,17 @@ class ViewController: UIViewController {
     @IBAction func localPushWithCustomUI2(_ sender: AnyObject) {
         //  创建通知内容
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:", arguments: nil)
-        content.subtitle = NSDate().description
-        content.body = NSString.localizedUserNotificationString(forKey: "cheer music, best music\ncheer music, best music", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: "Form cheer fans:",
+                                                                 arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "cheer music,best music.\n下拉或重压显示更多",
+                                                                arguments: nil)
         content.sound = UNNotificationSound.default()
         content.badge = UIApplication.shared().applicationIconBadgeNumber + 1;
-        content.categoryIdentifier = String.UNNotificationCategory.CheerText.rawValue   //  设置通知类型
+        content.categoryIdentifier = String.UNNotificationCategory.CheerText.rawValue           //  设置通知类型标示
+        content.userInfo["imageAbsoluteString"] = URL.resource(type: .Remote).absoluteString
         
         //  加入 attachment 附件
-        let path = Bundle.main().pathForResource("cheer", ofType: "png")
-        let url = URL(fileURLWithPath: path!)
-        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
+        let attachement = try? UNNotificationAttachment(identifier: "attachment", url: URL.resource(type: .Local), options: nil)
         content.attachments = [attachement!]
         
         //  创建通知请求

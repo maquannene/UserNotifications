@@ -28,3 +28,33 @@ extension String {
         case LocalPushWithCustomUI2
     }
 }
+
+extension URL {
+    
+    enum ResourceType : String {
+        case Local
+        case Local1
+        case Remote
+    }
+    
+    static func resource(type :ResourceType) -> URL {
+        switch type {
+        case .Local:
+            return Bundle.main().urlForResource("cheer", withExtension: "png")!
+        case .Local1:
+            return Bundle.main().urlForResource("hahaha", withExtension: "gif")!
+        case .Remote:
+            return URL(string: "http://ww1.sinaimg.cn/large/65312d9agw1f59leskkcij20cs0csmym.jpg")!
+        }
+    }
+}
+
+extension URLSession {
+    class func downloadImage(atURL url: URL, withCompletionHandler completionHandler: (Data?, NSError?) -> Void) {
+        let dataTask = URLSession.shared().dataTask(with: url) { (data, urlResponse, error) in
+            completionHandler(data, error)
+        }
+        dataTask.resume()
+    }
+}
+

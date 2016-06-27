@@ -16,10 +16,13 @@
 		D417B4B51D1BE6B3007549F7 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D417B4B41D1BE6B3007549F7 /* NotificationViewController.swift */; };
 		D417B4B81D1BE6B3007549F7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D417B4B61D1BE6B3007549F7 /* MainInterface.storyboard */; };
 		D417B4BC1D1BE6B3007549F7 /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D417B4B01D1BE6B3007549F7 /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D4428BEA1D20D11300BE2F59 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CB7C31D1D1079009F71A9 /* Extension.swift */; };
 		D47CB7C41D1D1079009F71A9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CB7C31D1D1079009F71A9 /* Extension.swift */; };
 		D47CB7C51D1D108C009F71A9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CB7C31D1D1079009F71A9 /* Extension.swift */; };
 		D47CB7C71D1D12B5009F71A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47CB7C61D1D12B5009F71A9 /* Foundation.framework */; };
 		D4C962CD1D1D081B0029D176 /* cheer.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C962CC1D1D081B0029D176 /* cheer.png */; };
+		D4E174CE1D20DBF400BE1362 /* hahaha.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4E174CD1D20DBF400BE1362 /* hahaha.gif */; };
+		D4E174D01D211D3F00BE1362 /* cheer.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C962CC1D1D081B0029D176 /* cheer.png */; };
 		D4E910711D1B973400620433 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E910701D1B973400620433 /* AppDelegate.swift */; };
 		D4E910731D1B973400620433 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E910721D1B973400620433 /* ViewController.swift */; };
 		D4E910761D1B973400620433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E910741D1B973400620433 /* Main.storyboard */; };
@@ -75,6 +78,7 @@
 		D4912E371D1BFF5B00AC2C7E /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		D4912E381D1BFF5E00AC2C7E /* NotificationContent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NotificationContent.entitlements; sourceTree = "<group>"; };
 		D4C962CC1D1D081B0029D176 /* cheer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheer.png; sourceTree = "<group>"; };
+		D4E174CD1D20DBF400BE1362 /* hahaha.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hahaha.gif; sourceTree = "<group>"; };
 		D4E9106D1D1B973400620433 /* NotificationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E910701D1B973400620433 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4E910721D1B973400620433 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 			children = (
 				D4912E361D1BFF5900AC2C7E /* NotificationDemo.entitlements */,
 				D4C962CC1D1D081B0029D176 /* cheer.png */,
+				D4E174CD1D20DBF400BE1362 /* hahaha.gif */,
 				D4E910701D1B973400620433 /* AppDelegate.swift */,
 				D4E910721D1B973400620433 /* ViewController.swift */,
 				D47CB7C31D1D1079009F71A9 /* Extension.swift */,
@@ -255,6 +260,9 @@
 						DevelopmentTeamName = "Zhuhai Kingsoft Office Software Co., Ltd.";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -266,6 +274,9 @@
 						DevelopmentTeamName = "Zhuhai Kingsoft Office Software Co., Ltd.";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -277,6 +288,9 @@
 						DevelopmentTeamName = "Zhuhai Kingsoft Office Software Co., Ltd.";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -312,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E174D01D211D3F00BE1362 /* cheer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +345,7 @@
 				D4E9107B1D1B973400620433 /* LaunchScreen.storyboard in Resources */,
 				D4E910781D1B973400620433 /* Assets.xcassets in Resources */,
 				D4E910761D1B973400620433 /* Main.storyboard in Resources */,
+				D4E174CE1D20DBF400BE1362 /* hahaha.gif in Resources */,
 				D4C962CD1D1D081B0029D176 /* cheer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4428BEA1D20D11300BE2F59 /* Extension.swift in Sources */,
 				D417B4A31D1BE674007549F7 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

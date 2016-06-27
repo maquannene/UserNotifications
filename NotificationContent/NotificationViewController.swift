@@ -35,10 +35,20 @@ extension NotificationViewController : UNNotificationContentExtension {
     func didReceive(_ notification: UNNotification) {
         let content = notification.request.content
         self.label?.text = content.body
-        if let attachement = content.attachments.first {
-            if attachement.url.startAccessingSecurityScopedResource() {
-                imageView.image = UIImage(contentsOfFile: attachement.url.path!)
-                attachement.url.stopAccessingSecurityScopedResource()
+        
+        if let imageAbsoluteString = content.userInfo["imageAbsoluteString"] as? String,
+            url = URL(string: imageAbsoluteString) {
+            URLSession.downloadImage(atURL: url) { [weak self] (data, error) in
+                if let _ = error {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.imageView.image = UIImage(data: data)
+                    self?.imageView.isHidden = false
+                }
             }
         }
     }
@@ -68,7 +78,7 @@ extension NotificationViewController : UNNotificationContentExtension {
                 perform(#selector(NotificationViewController.dismissssss), with: nil, afterDelay: 1)
                 break
             case String.UNNotificationAction.Reject.rawValue:
-                sublabel.text = "不能不同意"
+                sublabel.text = "不能不同意，无法 dismiss"
                 completion(.doNotDismiss)
                 break
             case String.UNNotificationAction.Input.rawValue:
