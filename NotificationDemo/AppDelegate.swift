@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //  设置通知处理回调
+        //  设置通知处理代理
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        //  认证通知
+        //  请求认证通知
         center.requestAuthorization([.alert, .sound, .badge]) { (granted, error) in
             if granted == true {
                 application.registerForRemoteNotifications()
@@ -30,13 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print(deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: ""))
+        print("设备 token = " + deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: ""))
     }
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        
+        print("如果需要实验远程推送，请确保使用真机");
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
     }
 }
 
@@ -52,8 +51,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: () -> Void) {
         
+        let responseNotificationRequestIdentifier = response.notification.request.identifier
+        
         //  判断具体通知请求功能
-        if response.notification.request.identifier == String.UNNotificationRequest.Test.rawValue {
+        if responseNotificationRequestIdentifier == String.UNNotificationRequest.NormalLocalPush.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithTrigger.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithCustomUI1.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithCustomUI2.rawValue {
+            
             let actionIdentifier = response.actionIdentifier
             switch actionIdentifier {
             case String.UNNotificationAction.Accept.rawValue:
@@ -75,7 +80,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 break
             }
         }
-        
         completionHandler();
     }
 }

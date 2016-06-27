@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import UserNotificationsUI
 
-class NotificationViewController: UIViewController, UNNotificationContentExtension {
+class NotificationViewController: UIViewController {
 
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var label: UILabel!
@@ -23,6 +23,14 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         //  可以自定义 size
         self.preferredContentSize = CGSize(width: self.view.bounds.width, height: 300)
     }
+    
+    func dismissssss() {
+        actionCompletion?()
+        actionCompletion = nil
+    }
+}
+
+extension NotificationViewController : UNNotificationContentExtension {
     
     func didReceive(_ notification: UNNotification) {
         let content = notification.request.content
@@ -37,8 +45,21 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ response: UNNotificationResponse,
                     completionHandler completion: (UNNotificationContentExtensionResponseOption) -> Void) {
+        
+        //  如果 action 来自于 textInput
+        if let textInputResponse = response as? UNTextInputNotificationResponse {
+            print(textInputResponse.userText)   //  打印输入内容
+            completion(.dismiss)
+            return
+        }
+        
+        let responseNotificationRequestIdentifier = response.notification.request.identifier
         //  判断具体通知请求功能
-        if response.notification.request.identifier == String.UNNotificationRequest.Test.rawValue {
+        if responseNotificationRequestIdentifier == String.UNNotificationRequest.NormalLocalPush.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithTrigger.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithCustomUI1.rawValue ||
+            responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithCustomUI2.rawValue {
+            
             let actionIdentifier = response.actionIdentifier
             switch actionIdentifier {
             case String.UNNotificationAction.Accept.rawValue:
@@ -51,24 +72,11 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                 completion(.doNotDismiss)
                 break
             case String.UNNotificationAction.Input.rawValue:
-//                inputTextField.becomeFirstResponder()
+                becomeFirstResponder()
                 break
             default:
                 break
             }
         }
-    }
-//    
-//    override var inputAccessoryView: UIView? {
-//        return inputTextField
-//    }
-    
-    override func canBecomeFirstResponder() -> Bool {
-        return true
-    }
-    
-    func dismissssss() {
-        actionCompletion?()
-        actionCompletion = nil
     }
 }

@@ -26,13 +26,13 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>UNNotificationExtensionDefaultContentHidden</key>
-			<false/>
 			<key>UNNotificationExtensionCategory</key>
 			<array>
 				<string>Cheer</string>
 				<string>CheerText</string>
 			</array>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<false/>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
 			<integer>0</integer>
 		</dict>

@@ -22,6 +22,9 @@ extension String {
     }
     
     enum UNNotificationRequest : String {
-        case Test
+        case NormalLocalPush
+        case LocalPushWithTrigger
+        case LocalPushWithCustomUI1
+        case LocalPushWithCustomUI2
     }
 }

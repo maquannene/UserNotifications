@@ -18,12 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oz0-Ua-uFb">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oz0-Ua-uFb">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3H-NM-JWm">
                                         <state key="normal" title="普通本地推送"/>
                                         <connections>
                                             <action selector="localPush:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BVZ-vj-rQf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEL-ue-LUO">
+                                        <state key="normal" title="带有交付条件的推送"/>
+                                        <connections>
+                                            <action selector="localPushWithTrigger:" destination="BYZ-38-t0r" eventType="touchUpInside" id="29X-Xq-o3q"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydF-Xf-AHq">
@@ -36,6 +42,12 @@
                                         <state key="normal" title="本地推送自定义Extension2"/>
                                         <connections>
                                             <action selector="localPushWithCustomUI2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="07D-Lh-Yp9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikJ-t8-ebf">
+                                        <state key="normal" title="移除本地通知"/>
+                                        <connections>
+                                            <action selector="removeNotify:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C8M-yz-JPW"/>
                                         </connections>
                                     </button>
                                 </subviews>
