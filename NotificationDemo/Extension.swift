@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+    
     enum UNNotificationAction : String {
         case Accept
         case Reject
@@ -50,6 +51,7 @@ extension URL {
 }
 
 extension URLSession {
+    
     class func downloadImage(atURL url: URL, withCompletionHandler completionHandler: (Data?, NSError?) -> Void) {
         let dataTask = URLSession.shared().dataTask(with: url) { (data, urlResponse, error) in
             completionHandler(data, error)
