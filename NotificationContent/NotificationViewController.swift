@@ -20,7 +20,7 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //  可以自定义 size
+        //  custom content size of view
         self.preferredContentSize = CGSize(width: self.view.bounds.width, height: 300)
     }
     
@@ -56,15 +56,15 @@ extension NotificationViewController : UNNotificationContentExtension {
     func didReceive(_ response: UNNotificationResponse,
                     completionHandler completion: (UNNotificationContentExtensionResponseOption) -> Void) {
         
-        //  如果 action 来自于 textInput
+        //  if response is UNTextInputNotificationResponse
         if let textInputResponse = response as? UNTextInputNotificationResponse {
-            print(textInputResponse.userText)   //  打印输入内容
+            print(textInputResponse.userText)
             completion(.dismiss)
             return
         }
         
         let responseNotificationRequestIdentifier = response.notification.request.identifier
-        //  判断具体通知请求功能
+    
         if responseNotificationRequestIdentifier == String.UNNotificationRequest.NormalLocalPush.rawValue ||
             responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithTrigger.rawValue ||
             responseNotificationRequestIdentifier == String.UNNotificationRequest.LocalPushWithCustomUI1.rawValue ||
@@ -73,12 +73,12 @@ extension NotificationViewController : UNNotificationContentExtension {
             let actionIdentifier = response.actionIdentifier
             switch actionIdentifier {
             case String.UNNotificationAction.Accept.rawValue:
-                sublabel.text = "你很有品味"
+                sublabel.text = "Good"
                 actionCompletion = { completion(.dismiss) }
                 perform(#selector(NotificationViewController.dismissssss), with: nil, afterDelay: 1)
                 break
             case String.UNNotificationAction.Reject.rawValue:
-                sublabel.text = "不能不同意，无法 dismiss"
+                sublabel.text = "Don't allow reject，can't dismiss"
                 completion(.doNotDismiss)
                 break
             case String.UNNotificationAction.Input.rawValue:

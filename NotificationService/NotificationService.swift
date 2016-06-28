@@ -8,7 +8,8 @@
 
 
 /*
- 推送数据结构：
+ Service push data struct:
+ 
  {
     "aps" : {
         "alert" : {
