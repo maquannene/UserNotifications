@@ -36,8 +36,10 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        //  这里我直接将资源文件加入了 bundle然后读取
-        //  如果想要使用 container app 下载的文件，需要先加入同一个 App Groups，并且下载的文件存入共享位置
+        //  这里我直接将资源文件加入了 bundle 然后读取
+        //  如果想要共享 host app 的沙盒中的数据，需要先加入同一个 App Group，并且下载的文件存入共享位置
+        //  I add resource to NotificationServiceExtension bundle, so can use it directly.
+        //  If you want use host app's sandbox data, you need create a app group, and add extension app and host app to it.
         let url = URL.resource(type: .Local)
         let attachement = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
         
