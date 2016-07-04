@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         //  create Notification Category, and add category to NotificationContentExtension plist
         let cheerText = UNNotificationCategory(identifier: String.UNNotificationCategory.CheerText.rawValue,
                                                actions: [ accept, reject, comment ],
-                                               minimalActions: [ accept, reject, comment ],
+                                               minimalActions: [ accept, comment, reject ],
                                                intentIdentifiers: [],
                                                options: [])
         //  add category to notification center categroies
