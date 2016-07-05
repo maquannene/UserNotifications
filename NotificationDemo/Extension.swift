@@ -36,6 +36,7 @@ extension URL {
         case Local
         case Local1
         case Remote
+        case AttachmentRemote
     }
     
     static func resource(type :ResourceType) -> URL {
@@ -46,6 +47,8 @@ extension URL {
             return Bundle.main().urlForResource("hahaha", withExtension: "gif")!
         case .Remote:
             return URL(string: "http://ww1.sinaimg.cn/large/65312d9agw1f59leskkcij20cs0csmym.jpg")!
+        case .AttachmentRemote:
+            return URL(string: "https://assets-cdn.github.com/images/modules/open_graph/github-mark.png")!
         }
     }
 }

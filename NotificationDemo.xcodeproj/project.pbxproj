@@ -22,7 +22,6 @@
 		D47CB7C71D1D12B5009F71A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47CB7C61D1D12B5009F71A9 /* Foundation.framework */; };
 		D4C962CD1D1D081B0029D176 /* cheer.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C962CC1D1D081B0029D176 /* cheer.png */; };
 		D4E174CE1D20DBF400BE1362 /* hahaha.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4E174CD1D20DBF400BE1362 /* hahaha.gif */; };
-		D4E174D01D211D3F00BE1362 /* cheer.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C962CC1D1D081B0029D176 /* cheer.png */; };
 		D4E910711D1B973400620433 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E910701D1B973400620433 /* AppDelegate.swift */; };
 		D4E910731D1B973400620433 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E910721D1B973400620433 /* ViewController.swift */; };
 		D4E910761D1B973400620433 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E910741D1B973400620433 /* Main.storyboard */; };
@@ -261,7 +260,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -275,7 +274,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -289,7 +288,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -326,7 +325,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4E174D01D211D3F00BE1362 /* cheer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +429,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -445,7 +443,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -459,7 +457,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb.NotificationContent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm.NotificationContent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -473,7 +471,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb.NotificationContent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm.NotificationContent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -578,7 +576,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -593,7 +591,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NotificationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = maquan.vb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingsoft.www.office.wpsemm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
